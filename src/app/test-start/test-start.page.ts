@@ -30,18 +30,18 @@ export class TestStartPage implements OnInit {
 
   ngOnInit() {
     this.getStudent();
-    this.activeRouter.params.subscribe(params=>{
-      console.log(params); 
-      this.type = parseInt( params.type );
-      if(this.type === 2){
-         this.title = 'แบบทดสอบหลังเรียน';
-      }  
-   });
+    this.activeRouter.params.subscribe(params => {
+      console.log(params);
+      this.type = parseInt(params.type);
+      if (this.type === 2) {
+        this.title = 'แบบทดสอบหลังเรียน';
+      }
+    });
     this.getData();
   }
   onSelected(data) {
     if (typeof this.answers !== 'undefined' && this.answers.length > 0) {
-      for (let i in this.answers) { 
+      for (let i in this.answers) {
         if (this.answers[i].test_id === data.test_id) {
           delete (this.answers[i]);
         }
@@ -51,27 +51,27 @@ export class TestStartPage implements OnInit {
       this.answers.push(data);
     }
     this.answers = this.answers.filter(x => x !== null);
-    
+
   }
-  onSubmit(){
+  onSubmit() {
     const data = JSON.stringify(this.answers);
     this.lessonService.saveTest(data, this.type)
-    .subscribe(result=>{
-      this.getStudent();
-      this.storage.set('score', JSON.stringify(result));
-      setTimeout(()=>{
-        this.router.navigate(['/score']);
-      },1000);
-    }); 
+      .subscribe(result => {
+        this.getStudent();
+        this.storage.set('score', JSON.stringify(result));
+        setTimeout(() => {
+          this.router.navigate(['/score']);
+        }, 1000);
+      });
   }
-  getStudent(){
-     console.info('get-student....');
-    this.lessonService.getStudentByid().subscribe(result=>{
-      if(result != null){
-        this.storage.set('start_score',result['data']['start_score']);
-        this.storage.set('end_score',result['data']['end_score']);
+  getStudent() {
+    console.info('get-student....');
+    this.lessonService.getStudentByid().subscribe(result => {
+      if (result != null) {
+        this.storage.set('start_score', result['data']['start_score']);
+        this.storage.set('end_score', result['data']['end_score']);
       }
-      //this.storage.set('USER_INFO', JSON.stringify(result['data'])).then((response) => {});
+      this.storage.set('USER_INFO', JSON.stringify(result['data'])).then((response) => { });
     });
   }
 
@@ -80,6 +80,9 @@ export class TestStartPage implements OnInit {
     this.lessonService.getTest(this.type).subscribe(result => {
       if (result.success === true) {
         this.tests = result.data;
+        console.warn('ข้อสอบ ', result.data);
+        console.warn('จำนวนข้อสอบ ', result.data.length);
+        this.storage.set('number_score', result.data.length);
       } else {
         this.presentAlert('Warning', result.data);
       }

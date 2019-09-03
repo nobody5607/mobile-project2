@@ -23,10 +23,18 @@ export class ScorePage implements OnInit {
     console.info('get score...');
     this.storage.get('score').then(result => {
       if (result != null) {
-        this.data = JSON.parse(result); 
-        this.data['count'] = this.data['data'].length;
+        this.data = JSON.parse(result);
+        //this.data['count'] = this.data['data'].length;
+        console.log(this.data);
       }
     });
+    this.storage.get('number_score').then(result => {
+      if (result != null) { 
+        this.data['count'] = result; 
+        console.warn('number score', this.data['count']);
+      }
+    });
+    //
   }
   goHome(){
     this.router.navigate(['home']);

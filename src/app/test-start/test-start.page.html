@@ -14,7 +14,10 @@
           
         <ion-item class="item-label item ios in-list ion-focusable hydrated" *ngFor="let i of tests">
           <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
-            <h2>{{i.number}}. {{i.question}} </h2> 
+            <ion-row>
+              <ion-col size='2'><h2>{{i.number}}.</h2></ion-col>
+              <ion-col size='10'><h2 text-wrap [innerHTML]="i.question" style="margin-top: -3px;"></h2> </ion-col>
+            </ion-row>
             
             
             <ion-list >

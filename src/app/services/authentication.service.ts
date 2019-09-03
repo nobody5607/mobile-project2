@@ -25,18 +25,25 @@ export class AuthenticationService {
   ) {
     this.platform.ready().then(() => {
       this.ifLoggedIn();
-    });
+    });   
   }
   ifLoggedIn() {
-    this.storage.get('USER_INFO').then((response) => {
+    console.warn('ifLoggedIn');
+    this.storage.get('USER_INFO').then((response) => { 
       if (response) {
+        console.warn('line 34 status login ', true);
+        console.warn('USER_INFO ', response);
         this.authState.next(true);
+        this.router.navigate(['home']);
       }
+      console.warn('line 37 status login ', false);
     });
   }
   getUser() {
     return this.storage.get('USER_INFO').then(result => result);
   }
+ 
+
   login(username, password): Observable<any> {
     const httpOptions = { headers: new HttpHeaders({}) };
     const form = new FormData();
@@ -45,13 +52,13 @@ export class AuthenticationService {
     return this.http.post(`${this.baseUrl}/login`, form, httpOptions).pipe(
       map(results => {
         if (results['success'] === true) {
+          console.warn('status login ', results['success']);
+          this.authState.next(true);
           this.storage.set('start_score', results['data']['start_score']);
-          this.storage.set('end_score', results['data']['end_score']);
-
-          this.storage.set('USER_INFO', JSON.stringify(results['data'])).then((response) => {
-            this.authState.next(true);
-          });
+          this.storage.set('end_score', results['data']['end_score']); 
+          this.storage.set('USER_INFO', JSON.stringify(results['data'])); 
         }
+        console.warn('status auth ', this.authState);
         return results;
       }),
       catchError(err => {
@@ -65,7 +72,8 @@ export class AuthenticationService {
   logout() {
     this.storage.remove('start_score').then(() => { });
     this.storage.remove('end_score').then(() => { });
-    this.storage.remove('USER_INFO').then(() => {
+    this.storage.remove('number_score').then(() => { });
+    this.storage.remove('USER_INFO').then(() => { 
 
       this.router.navigate(['start']);
       this.authState.next(false);

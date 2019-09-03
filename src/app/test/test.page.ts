@@ -21,7 +21,15 @@ export class TestPage implements OnInit {
   ) { }
 
   ngOnInit() {
+     this.getData(); 
+  }
+  ionViewWillEnter() {
+    console.warn('ionViewWillEnter');
     this.getData();
+  }
+
+  getData() {
+    console.info('get data test...');
     this.storage.get('start_score').then(start_score => {
       console.info('StartScore', start_score);
       if(start_score != null && start_score >= 0){
@@ -33,10 +41,6 @@ export class TestPage implements OnInit {
         this.enableEndTest = false;
       }
     });
-  }
-
-  getData() {
-    console.info('get data test...');
     
   }
   score(){
