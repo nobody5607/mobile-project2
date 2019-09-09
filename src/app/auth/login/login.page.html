@@ -1,6 +1,7 @@
 <ion-content>
 <div style="
-background: #030101 url(../../assets/images/student.jpg)no-repeat 61% -15px;
+
+background: #030101 url()no-repeat 61% -15px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     /* background-size: contain; */
@@ -11,12 +12,12 @@ padding-left: 20%;
 padding-right: 15%;">
      
         <div>
-          <label style="color:#fff;">Username</label>
-          <ion-input style="color:#fff;border: 1px solid #acacb7;" name="username" type="text" placeholder="username" ngModel required></ion-input>
+          <label style="color:#fff;">รหัสประจำตัวนักเรียน</label>
+          <ion-input style="color:#fff;border: 1px solid #acacb7;" name="username" type="text" placeholder="กรุณารหัสประจำตัวนักเรียน" ngModel required></ion-input>
         </div>
         <div style="margin-top:5px;">
-            <label style="color:#fff;">Password</label>
-          <ion-input style="color:#fff;border: 1px solid #acacb7;" name="password" type="password" placeholder="Password" ngModel required></ion-input>
+            <label style="color:#fff;">รหัสผ่าน</label>
+          <ion-input style="color:#fff;border: 1px solid #acacb7;" name="password" type="password" placeholder="รหัสผ่าน" ngModel required></ion-input>
         </div>
        <div style="text-align: center;">
          <img (click)="Login(form)" src="../../assets/images/btn_login.jpg" style="    margin-top: 10px;

@@ -29,14 +29,14 @@
                   <h2><ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon> ตอบผิด {{data['totalWrongScore']}} </h2>
               </ion-text>
               <ion-text color="primary">
-                  <h2>จำนวนข้อ {{data['count']}}</h2>
+                  <h2>จำนวนข้อทั้งหมด {{data['count']}}</h2>
               </ion-text>
               
           </ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <div class="btn-wrapper" style="text-align: center;">
-              <ion-button (click)="goHome()" color="primary">OK</ion-button></div>
+              <ion-button (click)="goHome()" color="danger">ย้อนกลับ</ion-button></div>
           
         </ion-card-content>
       
