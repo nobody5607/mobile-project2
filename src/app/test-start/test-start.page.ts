@@ -82,6 +82,7 @@ export class TestStartPage implements OnInit {
         this.tests = result.data;
         console.warn('ข้อสอบ ', result.data); 
         console.warn('จำนวนข้อสอบ ', result.data.length);
+        this.storage.set('number_score', result.data.length);
         if (this.type === 1) {
           this.storage.set('number_score_start', result.data.length);
         }else{
