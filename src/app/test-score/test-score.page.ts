@@ -8,14 +8,20 @@ import { Storage } from '@ionic/storage';
 export class TestScorePage implements OnInit {
   start_score:number = 0;
   end_score:number = 0;
-  number:number = 0;
+  numberSt:number = 0;
+  numberEn:number = 0;
   constructor(private storage: Storage) { }
 
   ngOnInit() {
-    this.storage.get('score').then(res=>{
+    this.storage.get('number_score_start').then(res=>{
       let score = JSON.parse(res);
       console.warn(score.data.length);
-      this.number = score.data.length;
+      this.numberSt = score.data.length;
+    });
+    this.storage.get('number_score_end').then(res=>{
+      let score = JSON.parse(res);
+      console.warn(score.data.length);
+      this.numberEn = score.data.length;
     });
 
 
